@@ -13,13 +13,20 @@ Version: Beta 0.1.3
 
 # ------------ Import libraries --------------
 
+
 import json
 from random import *
 from math import *
-from os import makedirs, path
+from os import makedirs, path, system
 from datetime import date, datetime
 from xml.dom.minidom import Element
 
+# Installs eel for HTML GUI
+try:
+    from eel import *
+except ImportError:
+    system('python -m pip install eel')
+    from eel import *
 
 # ----------- Initialize variables -----------
 
@@ -28,7 +35,7 @@ element_current_dict = []
 
 output_folder = "Generated/"
 
-credits =  "Made using ultimatech's procedural model generator"
+credits = "Made using ultimatech's procedural model generator"
 
 # ------------- Main generator ---------------
 
@@ -146,8 +153,8 @@ def generate_cube(XSize, YSize, ZSize, ColorMode):
 def generate_file():
 
     generated_json = {
-    "credit": credits,
-    "elements": element_dict
+        "credit": credits,
+        "elements": element_dict
     }
 
     # Creates a folder for generated models if it doesn't already exists
@@ -160,7 +167,7 @@ def generate_file():
 
     # Generates the .json file(s) in the "Generated" folder
     with open(output_folder + output_name + ".json", 'w') as json_file:
-        json.dump(generated_json + element_dict, json_file, indent=4, sort_keys=False)
+        json.dump(generated_json, json_file, indent=4, sort_keys=False)
 
     # Creates a copy always named "latest" for easier access
     with open(output_folder + "latest.json", 'w') as json_file:
