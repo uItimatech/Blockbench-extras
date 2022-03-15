@@ -18,19 +18,17 @@ from random import *
 from math import *
 from os import makedirs, path
 from datetime import date, datetime
+from xml.dom.minidom import Element
 
 
 # ----------- Initialize variables -----------
 
-element_list = {}
+element_dict = {}
 element_current_dict = []
 
 output_folder = "Generated/"
 
-credits = {
-    "credit": "Made using ultimatech's procedural model generator",
-    "elements": element_list
-}
+credits =  "Made using ultimatech's procedural model generator"
 
 # ------------- Main generator ---------------
 
@@ -104,9 +102,9 @@ def generate_sphere(SphereRadius, FillMode, ColorMode):
 
                     generate_element(color_selector(ColorMode))
 
-    temp_element_list = element_current_dict
+    temp_element_dict = element_current_dict
 
-    return temp_element_list
+    return temp_element_dict
 
 
 # Cube generator
@@ -138,14 +136,19 @@ def generate_cube(XSize, YSize, ZSize, ColorMode):
                         }
                     })
 
-    temp_element_list = element_current_dict
+    temp_element_dict = element_current_dict
 
-    return temp_element_list
+    return temp_element_dict
 
 
 # -------------- Output file ------------------
 
 def generate_file():
+
+    generated_json = {
+    "credit": credits,
+    "elements": element_dict
+    }
 
     # Creates a folder for generated models if it doesn't already exists
     if not path.exists(output_folder):
@@ -157,23 +160,23 @@ def generate_file():
 
     # Generates the .json file(s) in the "Generated" folder
     with open(output_folder + output_name + ".json", 'w') as json_file:
-        json.dump(credits, json_file, indent=4, sort_keys=False)
+        json.dump(generated_json + element_dict, json_file, indent=4, sort_keys=False)
 
     # Creates a copy always named "latest" for easier access
     with open(output_folder + "latest.json", 'w') as json_file:
-        json.dump(credits, json_file, indent=4, sort_keys=False)
+        json.dump(generated_json, json_file, indent=4, sort_keys=False)
 
     # Generates - Debug and testing only
     '''with open('TEMP\generated.json', 'w') as json_file:
-        json.dump(credits, json_file, indent=4, sort_keys=False)'''
+        json.dump(generated_json, json_file, indent=4, sort_keys=False)'''
 
     print("\n Generation complete! \n")
 
 
 # ------------- Required model ----------------
 
-element_list = generate_cube(20, 45, 20, "Hashed")
-#element_list = generate_sphere(10, "Surface", 9)
+element_dict = generate_cube(20, 45, 20, "Hashed")
+#element_dict = generate_sphere(10, "Surface", 9)
 
 generate_file()
 
