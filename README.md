@@ -1,5 +1,5 @@
 # Blockbench-extras
-Modelling software with advanced tools. Not officialy paired to Blockbench.
+Blockbench plugin that aims to add specific shape generators and advanced features.
 
 *Created by ultimatech*
 
