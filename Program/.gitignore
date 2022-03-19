@@ -132,3 +132,5 @@ dmypy.json
 TEMP/
 Generated/
 OLD/
+Advanced shape generator/template.js
+Plugin/template.js
