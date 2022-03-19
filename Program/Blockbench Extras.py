@@ -1,5 +1,5 @@
-'''----------- BLOCKBENCH EXTRAS -------------
-
+'''-------------------------------------------
+               BLOCKBENCH EXTRAS
 ----------------------------------------------
 .Json model generator for Minecraft Java
 
@@ -8,6 +8,7 @@ First update: 13/03/2022 17:49
 Last update: 15/03/2022 19:30
 Version: Beta 0.1.3
 
+                    2022
 -------------------------------------------'''
 
 
@@ -28,6 +29,7 @@ except ImportError:
     system('python -m pip install eel')
     from eel import *
 
+
 # ----------- Initialize variables -----------
 
 element_dict = {}
@@ -37,8 +39,8 @@ output_folder = "Generated/"
 
 credits = "Made using ultimatech's procedural model generator"
 
-# ------------- Main generator ---------------
 
+# ------------- Main generator ---------------
 
 # Individual element generator
 def generate_element(current_color):
